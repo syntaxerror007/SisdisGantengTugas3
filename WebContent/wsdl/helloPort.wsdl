@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:hy="http://www.herongyang.com/Service/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://www.herongyang.com/Service/">
+
+  <wsdl:documentation>
+    Hello_WSDL_11_SOAP.wsdl
+    Copyright (c) 2007 by Dr. Herong Yang, herongyang.com
+    All rights reserved
+  </wsdl:documentation>
+
+  <wsdl:types>
+    <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.herongyang.com/Service/">
+      <xsd:element name="HelloRequest" type="xsd:string"/>
+      <xsd:element name="HelloResponse" type="xsd:string"/>
+    </xsd:schema>
+  </wsdl:types>
+
+  <wsdl:message name="helloInputMessage">
+    <wsdl:part element="hy:HelloRequest" name="helloInputPart"/>
+  </wsdl:message>
+  <wsdl:message name="helloOutputMessage">
+    <wsdl:part element="hy:HelloResponse" name="helloOutputPart"/>
+  </wsdl:message>
+
+  <wsdl:portType name="helloPortType">
+    <wsdl:operation name="Hello">
+      <wsdl:input message="hy:helloInputMessage" name="helloInput"/>
+      <wsdl:output message="hy:helloOutputMessage" name="helloOutput"/>
+    </wsdl:operation>
+  </wsdl:portType>
+
+  <wsdl:binding name="helloBinding" type="hy:helloPortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="Hello">
+      <soap:operation soapAction="http://www.herongyang.com/Service/Hello"/>
+      <wsdl:input name="helloInput">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="helloOutput">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+
+  <wsdl:service name="helloService">
+    <wsdl:port binding="hy:helloBinding" name="helloPort">
+      <soap:address location="http://localhost:8080/WebServiceProject/services/helloPort"/>
+    </wsdl:port>
+  </wsdl:service>
+
+</wsdl:definitions>
